@@ -81,7 +81,7 @@ test('Shows Network Error details when backend is unavailable', async ({ page })
 test('Displays Home page content correctly', async ({ page }) => {
   await page.goto('/');
   await expect(page.locator('main h2').first()).toContainText('Welcome to DevSecOps ToDo App');
-  await expect(page.locator('text=A modern, intuitive task management application')).toBeVisible();
+  await expect(page.locator('text=A task management application built with the latest web technologies')).toBeVisible();
   await expect(page.locator('h3', { hasText: 'What is this app?' })).toBeVisible();
   await expect(page.locator('h3', { hasText: 'Key Features' })).toBeVisible();
   await expect(page.locator('text=Create, complete, and delete tasks')).toBeVisible();

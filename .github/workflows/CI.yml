@@ -1,7 +1,7 @@
 name: DevSecOps GUI CI
 on:
-  push:
-    branches: [ develop, test, main ]
+  # push:
+  #   branches: [ develop, test, main ]
   pull_request:
     branches: [ develop, test, main ]
 jobs:
