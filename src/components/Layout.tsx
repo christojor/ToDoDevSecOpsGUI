@@ -10,9 +10,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               task_alt
             </span>
             <div>
-              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white">
                 DevSecOps ToDo App
-              </h1>
+              </h2>
             </div>
           </div>
         </div>

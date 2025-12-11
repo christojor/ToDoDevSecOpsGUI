@@ -7,7 +7,7 @@ export default function Home() {
           Welcome to DevSecOps ToDo App
         </h2>
         <p className="text-lg sm:text-xl text-gray-600 leading-relaxed">
-          A modern, intuitive task management application built with the latest web technologies.
+          A task management application built with the latest web technologies.
         </p>
       </div>
 
@@ -17,7 +17,7 @@ export default function Home() {
           What is this app?
         </h3>
         <p className="text-gray-700 leading-relaxed mb-4">
-          DevSecOps ToDo App is a streamlined task management tool designed to help you organize your daily tasks efficiently. 
+          DevSecOps ToDo App is a task management tool designed to help you organize your daily tasks. 
           Whether you're managing personal errands or professional projects, this app provides a clean, responsive interface 
           to keep track of what needs to be done.
         </p>
@@ -35,15 +35,15 @@ export default function Home() {
         <ul className="space-y-3 text-gray-700">
           <li className="flex items-start gap-2">
             <span className="material-symbols-outlined text-blue-500 text-xl mt-0.5">check_circle</span>
-            <span>Create, complete, and delete tasks with ease</span>
+            <span>Create, complete, and delete tasks</span>
           </li>
           <li className="flex items-start gap-2">
             <span className="material-symbols-outlined text-blue-500 text-xl mt-0.5">check_circle</span>
             <span>Clean, modern interface with responsive design</span>
           </li>
-          <li className="flex items-start gap-2">
-            <span className="material-symbols-outlined text-blue-500 text-xl mt-0.5">check_circle</span>
-            <span>State management with Zustand for optimal performance</span>
+          <li className="flex items-start gap-3">
+            <span className="material-symbols-outlined text-blue-500 text-2xl">settings</span>
+            <span>Server state management with TanStack Query for optimal performance</span>
           </li>
           <li className="flex items-start gap-2">
             <span className="material-symbols-outlined text-blue-500 text-xl mt-0.5">check_circle</span>

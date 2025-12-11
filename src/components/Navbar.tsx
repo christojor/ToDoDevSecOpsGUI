@@ -15,8 +15,7 @@ export default function Navbar() {
                 location.pathname === '/'
                   ? 'bg-blue-500 shadow-md'
                   : 'hover:bg-blue-100'
-              }`}
-            >
+              }`}>
               <span className={`material-symbols-outlined text-lg sm:text-xl ${
                 location.pathname === '/' ? 'text-white' : 'text-gray-700 hover:text-blue-700'
               }`}>home</span>
@@ -31,8 +30,7 @@ export default function Navbar() {
                 location.pathname === '/todos'
                   ? 'bg-blue-500 shadow-md'
                   : 'hover:bg-blue-100'
-              }`}
-            >
+              }`}>
               <span className={`material-symbols-outlined text-lg sm:text-xl ${
                 location.pathname === '/todos' ? 'text-white' : 'text-gray-700 hover:text-blue-700'
               }`}>checklist</span>
@@ -47,8 +45,7 @@ export default function Navbar() {
                 location.pathname === '/about'
                   ? 'bg-blue-500 shadow-md'
                   : 'hover:bg-blue-100'
-              }`}
-            >
+              }`}>
               <span className={`material-symbols-outlined text-lg sm:text-xl ${
                 location.pathname === '/about' ? 'text-white' : 'text-gray-700 hover:text-blue-700'
               }`}>info</span>

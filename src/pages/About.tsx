@@ -33,7 +33,7 @@ export default function About() {
               <span className="material-symbols-outlined text-blue-500 mt-1">check_circle</span>
               <div>
                 <strong className="text-blue-600">Vite</strong>
-                <span className="text-gray-600"> - Lightning-fast build tool</span>
+                <span className="text-gray-600"> - Build tool</span>
               </div>
             </li>
             <li className="flex items-start gap-3">
@@ -41,13 +41,6 @@ export default function About() {
               <div>
                 <strong className="text-blue-600">React Router</strong>
                 <span className="text-gray-600"> - Client-side routing</span>
-              </div>
-            </li>
-            <li className="flex items-start gap-3">
-              <span className="material-symbols-outlined text-blue-500 mt-1">check_circle</span>
-              <div>
-                <strong className="text-blue-600">Zustand</strong>
-                <span className="text-gray-600"> - Lightweight state management</span>
               </div>
             </li>
             <li className="flex items-start gap-3">
@@ -71,6 +64,20 @@ export default function About() {
                 <span className="text-gray-600"> - End-to-end testing</span>
               </div>
             </li>
+            <li className="flex items-start gap-3">
+              <span className="material-symbols-outlined text-blue-500 mt-1">check_circle</span>
+              <div>
+                <strong className="text-blue-600">TanStack Query</strong>
+                <span className="text-gray-600"> - Server state management & data fetching</span>
+              </div>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="material-symbols-outlined text-blue-500 mt-1">check_circle</span>
+              <div>
+                <strong className="text-blue-600">Axios</strong>
+                <span className="text-gray-600"> - HTTP client</span>
+              </div>
+            </li>
           </ul>
         </section>
 
@@ -85,20 +92,24 @@ export default function About() {
               <div className="text-gray-700">Client-side routing with React Router</div>
             </li>
             <li className="flex items-start gap-3">
-              <span className="material-symbols-outlined text-cyan-500 mt-1">storage</span>
-              <div className="text-gray-700">Global state management with Zustand</div>
+              <span className="material-symbols-outlined text-cyan-500 mt-1">cloud_sync</span>
+              <div className="text-gray-700">Server state management with TanStack Query</div>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="material-symbols-outlined text-cyan-500 mt-1">cached</span>
+              <div className="text-gray-700">Automatic caching and background refetching</div>
             </li>
             <li className="flex items-start gap-3">
               <span className="material-symbols-outlined text-cyan-500 mt-1">shield</span>
               <div className="text-gray-700">TypeScript for type safety</div>
             </li>
             <li className="flex items-start gap-3">
-              <span className="material-symbols-outlined text-cyan-500 mt-1">bolt</span>
-              <div className="text-gray-700">Hot Module Replacement (HMR)</div>
+              <span className="material-symbols-outlined text-cyan-500 mt-1">error</span>
+              <div className="text-gray-700">Error handling</div>
             </li>
             <li className="flex items-start gap-3">
               <span className="material-symbols-outlined text-cyan-500 mt-1">palette</span>
-              <div className="text-gray-700">Modern UI with Tailwind CSS</div>
+              <div className="text-gray-700">UI with Tailwind CSS</div>
             </li>
             <li className="flex items-start gap-3">
               <span className="material-symbols-outlined text-cyan-500 mt-1">widgets</span>
