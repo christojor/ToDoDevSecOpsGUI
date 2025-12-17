@@ -19,7 +19,7 @@ export default function About() {
               <span className="material-symbols-outlined text-blue-500 mt-1">check_circle</span>
               <div>
                 <strong className="text-blue-600">React 19</strong>
-                <span className="text-gray-600"> - Modern UI library</span>
+                <span className="text-gray-600"> - UI library</span>
               </div>
             </li>
             <li className="flex items-start gap-3">
@@ -47,14 +47,14 @@ export default function About() {
               <span className="material-symbols-outlined text-blue-500 mt-1">check_circle</span>
               <div>
                 <strong className="text-blue-600">Tailwind CSS</strong>
-                <span className="text-gray-600"> - Utility-first CSS framework</span>
+                <span className="text-gray-600"> - CSS framework</span>
               </div>
             </li>
             <li className="flex items-start gap-3">
               <span className="material-symbols-outlined text-blue-500 mt-1">check_circle</span>
               <div>
                 <strong className="text-blue-600">Material Icons</strong>
-                <span className="text-gray-600"> - Modern icon system</span>
+                <span className="text-gray-600"> - Icon system</span>
               </div>
             </li>
             <li className="flex items-start gap-3">

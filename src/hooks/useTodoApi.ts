@@ -1,6 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { todoApi } from '../services/todo.service';
 import type { CreateTodoDto, UpdateTodoDto } from '../types/api.types';
+import { getErrorMessage } from '../lib/errorHandler';
 
 export const todoKeys = {
   all: ['todos'] as const,
@@ -35,7 +36,8 @@ export const useCreateTodo = () => {
       queryClient.invalidateQueries({ queryKey: todoKeys.lists() });
     },
     onError: (error) => {
-      console.error('Failed to create todo:', error);
+      const message = getErrorMessage(error);
+      console.error('Failed to create todo:', message);
     },
   });
 };
@@ -51,7 +53,8 @@ export const useUpdateTodo = () => {
       queryClient.invalidateQueries({ queryKey: todoKeys.lists() });
     },
     onError: (error) => {
-      console.error('Failed to update todo:', error);
+      const message = getErrorMessage(error);
+      console.error('Failed to update todo:', message);
     },
   });
 };
@@ -65,7 +68,8 @@ export const useDeleteTodo = () => {
       queryClient.invalidateQueries({ queryKey: todoKeys.lists() });
     },
     onError: (error) => {
-      console.error('Failed to delete todo:', error);
+      const message = getErrorMessage(error);
+      console.error('Failed to delete todo:', message);
     },
   });
 };

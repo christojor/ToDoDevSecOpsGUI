@@ -1,11 +1,13 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useTodos, useCreateTodo, useUpdateTodo, useDeleteTodo } from '../hooks/useTodoApi'
+import { getErrorMessage } from '../lib/errorHandler'
 
 export default function Todos() {
   const [inputValue, setInputValue] = useState('')
   const [editingId, setEditingId] = useState<string | null>(null)
   const [editedName, setEditedName] = useState('')
+  const [validationError, setValidationError] = useState<string | null>(null)
   
   const { data: todos = [], isLoading, error } = useTodos()
   const createTodo = useCreateTodo()
@@ -18,9 +20,15 @@ export default function Todos() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (inputValue.trim()) {
+      setValidationError(null)
       createTodo.mutate({ name: inputValue.trim() }, {
         onSuccess: () => {
           setInputValue('')
+          setValidationError(null)
+        },
+        onError: (error) => {
+          const errorMessage = getErrorMessage(error)
+          setValidationError(errorMessage)
         }
       })
     }
@@ -46,12 +54,18 @@ export default function Todos() {
 
   const saveEdit = (id: string, isComplete: boolean) => {
     if (editedName.trim() && editedName !== '') {
+      setValidationError(null)
       updateTodo.mutate(
         { id, data: { name: editedName.trim(), isComplete } },
         {
           onSuccess: () => {
             setEditingId(null)
             setEditedName('')
+            setValidationError(null)
+          },
+          onError: (error) => {
+            const errorMessage = getErrorMessage(error)
+            setValidationError(errorMessage)
           }
         }
       )
@@ -101,7 +115,10 @@ export default function Todos() {
             <input
               type="text"
               value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
+              onChange={(e) => {
+                setInputValue(e.target.value)
+                if (validationError) setValidationError(null)
+              }}
               placeholder="Add a new todo..."
               disabled={createTodo.isPending}
               className="w-full pl-12 pr-4 py-3 bg-white border border-blue-200 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all shadow-sm disabled:opacity-50 disabled:cursor-not-allowed" />
@@ -123,6 +140,21 @@ export default function Todos() {
             )}
           </button>
         </div>
+        
+        {validationError && (
+          <div className="mt-3 p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3 animate-fade-in">
+            <span className="material-symbols-outlined text-red-500 mt-0.5">error</span>
+            <div className="flex-1">
+              <p className="text-sm font-semibold text-red-800 mb-1">Validation Error</p>
+              <p className="text-sm text-red-700 whitespace-pre-line">{validationError}</p>
+            </div>
+            <button
+              onClick={() => setValidationError(null)}
+              className="text-red-400 hover:text-red-600 transition-colors">
+              <span className="material-symbols-outlined text-lg">close</span>
+            </button>
+          </div>
+        )}
       </form>
 
       {isLoading ? (

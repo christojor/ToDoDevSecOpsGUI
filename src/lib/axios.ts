@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getErrorMessage, parseProblemDetails } from './errorHandler';
 
 const apiClient = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL || 'https://localhost:5001/api',
@@ -17,22 +18,21 @@ apiClient.interceptors.response.use(
   },
   (error) => {
     if (error.response) {
-      switch (error.response.status) {
-        // case 401:
-        //   console.error('Unauthorized access');
-        //   break;
-        case 403:
-          console.error('You do not have permission to perform this action');
-          break;
-        case 404:
-          console.error('The resource could not be found');
-          break;
-        case 500:
-          console.error('Internal Server Error');
-          break;
-        default:
-          console.error('API Error:', error.response.status, error.response.data);
+      const problemDetails = parseProblemDetails(error.response.data);
+      
+      if (import.meta.env.DEV) {
+        console.error('API Error:', {
+          status: error.response.status,
+          url: error.config?.url,
+          problemDetails,
+          data: error.response.data,
+        });
       }
+      
+      // Log user-friendly error message
+      const message = getErrorMessage(error);
+      console.error(`Error (${error.response.status}):`, message);
+      
     } else if (error.request) {
       console.error('No response received:', error.request);
     } else {
