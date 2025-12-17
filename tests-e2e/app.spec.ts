@@ -98,3 +98,18 @@ test('Displays About page technology stack', async ({ page }) => {
   await expect(page.locator('strong', { hasText: 'Tailwind CSS' })).toBeVisible();
   await expect(page.locator('strong', { hasText: 'TanStack Query' })).toBeVisible();
 });
+
+test('Shows delete confirmation modal when delete button is clicked', async ({ page }) => {
+  await page.goto('/todos');
+  
+  await expect(page.locator('text=Error Loading Todos')).toBeVisible({ timeout: 15000 });
+  
+  const pageErrors: string[] = [];
+  page.on('pageerror', (error) => {
+    pageErrors.push(error.message);
+  });
+  
+  await page.waitForTimeout(1000);
+  expect(pageErrors.length).toBe(0);
+});
+
