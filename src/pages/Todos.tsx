@@ -2,12 +2,14 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useTodos, useCreateTodo, useUpdateTodo, useDeleteTodo } from '../hooks/useTodoApi'
 import { getErrorMessage } from '../lib/errorHandler'
+import ConfirmModal from '../components/ConfirmModal'
 
 export default function Todos() {
   const [inputValue, setInputValue] = useState('')
   const [editingId, setEditingId] = useState<string | null>(null)
   const [editedName, setEditedName] = useState('')
   const [validationError, setValidationError] = useState<string | null>(null)
+  const [deleteConfirm, setDeleteConfirm] = useState<{ id: string; name: string } | null>(null)
   
   const { data: todos = [], isLoading, error } = useTodos()
   const createTodo = useCreateTodo()
@@ -38,8 +40,19 @@ export default function Todos() {
     updateTodo.mutate({ id, data: { name, isComplete: !isComplete } })
   }
 
-  const handleDelete = (id: string) => {
-    deleteTodo.mutate(id)
+  const handleDelete = (id: string, name: string) => {
+    setDeleteConfirm({ id, name })
+  }
+
+  const confirmDelete = () => {
+    if (deleteConfirm) {
+      deleteTodo.mutate(deleteConfirm.id)
+      setDeleteConfirm(null)
+    }
+  }
+
+  const cancelDelete = () => {
+    setDeleteConfirm(null)
   }
 
   const startEditing = (id: string, currentName: string) => {
@@ -210,19 +223,17 @@ export default function Todos() {
                         }}
                         autoFocus
                         disabled={updateTodo.isPending}
-                        className="flex-1 px-2 py-1 text-lg bg-white border-2 border-blue-400 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
-                      />
+                        className="flex-1 px-2 py-1 text-lg bg-white border-2 border-blue-400 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"/>
                     ) : (
                       <span
                         onDoubleClick={() => startEditing(todo.id, todo.name)}
                         className="flex-1 text-lg transition-all cursor-pointer text-gray-900"
-                        title="Double-click to edit"
-                      >
+                        title="Double-click to edit">
                         {todo.name}
                       </span>
                     )}
                     <button
-                      onClick={() => handleDelete(todo.id)}
+                      onClick={() => handleDelete(todo.id, todo.name)}
                       disabled={deleteTodo.isPending}
                       className="p-2 text-red-500 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all opacity-0 group-hover:opacity-100 flex items-center gap-1 disabled:opacity-50 disabled:cursor-not-allowed">
                       <span className="material-symbols-outlined">delete</span>
@@ -277,7 +288,7 @@ export default function Todos() {
                       </span>
                     )}
                     <button
-                      onClick={() => handleDelete(todo.id)}
+                      onClick={() => handleDelete(todo.id, todo.name)}
                       disabled={deleteTodo.isPending}
                       className="p-2 text-red-500 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all opacity-0 group-hover:opacity-100 flex items-center gap-1 disabled:opacity-50 disabled:cursor-not-allowed">
                       <span className="material-symbols-outlined">delete</span>
@@ -307,6 +318,16 @@ export default function Todos() {
           <span>Back to Home</span>
         </Link>
       </div>
+
+      <ConfirmModal
+        isOpen={deleteConfirm !== null}
+        title="Delete Todo"
+        message={`Do you want to delete "${deleteConfirm?.name}"?`}
+        confirmText="Delete"
+        cancelText="Cancel"
+        onConfirm={confirmDelete}
+        onCancel={cancelDelete}
+        variant="danger"/>
     </div>
   )
 }
